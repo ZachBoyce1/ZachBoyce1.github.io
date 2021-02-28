@@ -9,6 +9,26 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+body .center-img {
+  position: relative;
+  margin-top: 50%;
+  margin-right: 50%;
+  text-align: center;
+  color: #f0f5f9;
+}
+
+body .icon-mod {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  font-weight: bold;
+}
+
 body .section {
   color: #f0f5f9;
   text-align: center;

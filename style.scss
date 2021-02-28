@@ -12,6 +12,23 @@ html{
 body { 
     font-family: "Open Sans", sans-serif;
 
+    .center-img{
+        position: relative;
+        margin-top: 50%;
+        margin-right: 50%; 
+        text-align: center;
+        color: $offwhite;
+   
+    }
+    .icon-mod{
+        align-items: center;
+        justify-content: center;
+        height: 1.5rem;
+        width: 1.5rem;
+        font-weight: bold;
+    }
+
+
     .section{  
         color: $offwhite;
         text-align: center;
