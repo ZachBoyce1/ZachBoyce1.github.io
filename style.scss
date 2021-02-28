@@ -1,0 +1,65 @@
+
+@import "./bulma.css";
+@import "./colors.scss";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+
+html{
+    background-color:$dark;
+    
+}
+body { 
+    font-family: "Open Sans", sans-serif;
+
+    .section{  
+        color: $offwhite;
+        text-align: center;
+        
+
+    }
+
+    .subtitle{
+        color: $offwhite;
+        text-align: center;
+    }
+    p{
+        em{
+            color: #CE0F3D;
+            font-style: normal;
+        }
+    }
+    .barText{
+        text-align: left;
+    }
+
+
+    .socials{
+        
+        width: fit-content;
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        padding-bottom: 25px;
+        a{
+            color: $offwhite;
+            text-emphasis: none;
+    
+        }
+
+    }
+    a{
+        color: #4ebdfd;
+        text-emphasis: none;
+
+    }
+    a:hover{
+        color: $light-grey;
+    }
+
+
+
+   
+}
