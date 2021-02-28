@@ -50,9 +50,32 @@ body a {
   color: #4ebdfd;
   -webkit-text-emphasis: none;
           text-emphasis: none;
+  position: relative;
 }
 
 body a:hover {
   color: #c9d6df;
+}
+
+body a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #c9d6df;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transition: all 0.25s ease-in-out 0s;
+  transition: all 0.25s ease-in-out 0s;
+}
+
+body a:hover::before {
+  visibility: visible;
+  color: #c9d6df;
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
 }
 /*# sourceMappingURL=style.css.map */
