@@ -9,6 +9,21 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+body ::-moz-selection {
+  background: #52616b;
+  /* WebKit/Blink Browsers */
+}
+
+body ::selection {
+  background: #52616b;
+  /* WebKit/Blink Browsers */
+}
+
+body ::-moz-selection {
+  background: #52616b;
+  /* Gecko Browsers */
+}
+
 body .center-img {
   position: relative;
   margin-top: 50%;

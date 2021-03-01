@@ -12,6 +12,13 @@ html{
 body { 
     font-family: "Open Sans", sans-serif;
 
+    ::selection {
+        background:$grey; /* WebKit/Blink Browsers */
+      }
+      ::-moz-selection {
+        background:$grey; /* Gecko Browsers */
+      }
+
     .center-img{
         position: relative;
         margin-top: 50%;
