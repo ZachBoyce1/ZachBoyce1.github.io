@@ -6,9 +6,12 @@
 
 
 html{
-    background-color:$dark;
-    
+    background-color: #434350;
+    //background-color: #5d6062;
+    overflow: hidden;
 }
+
+
 body { 
     font-family: "Open Sans", sans-serif;
 
@@ -19,10 +22,21 @@ body {
         background:$grey; /* Gecko Browsers */
       }
 
-    .center-img{
-        position: relative;
-        margin-top: 50%;
-        margin-right: 50%; 
+      .bg{
+          background: $dark;
+          width: 90%;
+          margin: auto;
+          margin-top: 5%;
+          border-radius: 12px;
+          filter: drop-shadow(-8px 8px 6px #131414)
+      }
+
+    .my-img{
+        height: 256px;
+        width: 256px;
+        margin-top: -25%;
+        margin-left: auto;
+        margin-right:auto;
         text-align: center;
         color: $offwhite;
    
@@ -34,17 +48,61 @@ body {
         width: 1.5rem;
         font-weight: bold;
     }
+    
+    .right{
+        overflow: auto;
+        background-color: #FDFAF6;
+        border-bottom-right-radius: 12px;
+        border-top-right-radius: 12px;
+        max-height: 693px;
 
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+         -khtml-user-select: none;
+           -moz-user-select: none;
+            -ms-user-select: none;
+                user-select: none;
+    }
+    .right::-webkit-scrollbar {
+    width: 8px;
+    height: 100px;
+  }
+
+  .right::-webkit-scrollbar-track {
+    border-radius: 12px;
+    background: rgba(204, 204, 204, 0.692);
+  }
+  .right::-webkit-scrollbar-thumb {
+    background: rgba(107, 107, 107, 0.692);
+    opacity: 0.5;
+    border-radius: 12px;
+  }
+  .right::-webkit-scrollbar-button:end:increment {
+    height: 2%;
+    background: transparent;
+  }
+  .right::-webkit-scrollbar-button:start:decrement {
+    height: 2%;
+    background: transparent;
+  }
 
     .section{  
-        color: $offwhite;
-        text-align: center;
+        color: $dark;
         
 
     }
+    .name{
+        padding-top: 20px;
+        color: $offwhite;
+        text-align: center;
+    }
 
     .subtitle{
-        color: $offwhite;
+        color: $dark;
+    }
+
+    .subtext{
+        color: $offwhite !important;
         text-align: center;
     }
     p{
@@ -60,18 +118,11 @@ body {
 
     .socials{
         
-        width: fit-content;
-        position: relative;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-        padding-bottom: 25px;
-        a{
-            color: $offwhite;
-            text-emphasis: none;
-    
-        }
+        width: 25%;
+        position: absolute;
+        bottom: 15px;
+        margin-left: 3%;
+        padding-top: 25px;
 
     }
     a{
@@ -83,23 +134,7 @@ body {
     a:hover{
         color: $light-grey;
     }
-    a::before{
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        bottom: 0;
-        left: 0;
-        background-color:$light-grey;
-        visibility: hidden;
-        transform: scaleX(0);
-        transition: all 0.25s ease-in-out 0s;
-    }
-    a:hover::before {
-        visibility: visible;
-        color: $light-grey;
-        transform: scaleX(1);
-      }
+    
 
 
 
