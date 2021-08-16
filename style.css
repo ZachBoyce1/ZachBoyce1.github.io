@@ -16,6 +16,15 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+@media only screen and (max-width: 1280px) {
+  body .title.is-2 {
+    font-size: xx-large;
+  }
+  body .subtitle {
+    font-size: medium;
+  }
+}
+
 body ::-moz-selection {
   background: #52616b;
   /* WebKit/Blink Browsers */
@@ -137,7 +146,6 @@ body .barText {
 
 body .socials {
   bottom: 3%;
-  padding-top: 5%;
 }
 
 body a {
