@@ -9,12 +9,15 @@ html{
     background-color: #434350;
     //background-color: #5d6062;
     overflow: hidden;
+    @media only screen and (max-width: 768px){
+        overflow: visible;
+    }
 }
 
 
 body { 
     font-family: "Open Sans", sans-serif;
-
+    
     ::selection {
         background:$grey; /* WebKit/Blink Browsers */
       }
@@ -28,13 +31,17 @@ body {
           margin: auto;
           margin-top: 5%;
           border-radius: 12px;
-          filter: drop-shadow(-8px 8px 6px #131414)
+          filter: drop-shadow(-8px 8px 6px #131414);
+
+          @media only screen and (min-width: 768px){
+            max-height: 80vh;
+        }
       }
 
     .my-img{
-        height: 256px;
-        width: 256px;
-        margin-top: -25%;
+        height: 65%;
+        width: 65%;
+        //margin-top: -10%;
         margin-left: auto;
         margin-right:auto;
         text-align: center;
@@ -54,7 +61,7 @@ body {
         background-color: #FDFAF6;
         border-bottom-right-radius: 12px;
         border-top-right-radius: 12px;
-        max-height: 693px;
+        max-height: 80vh;
 
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -92,7 +99,7 @@ body {
 
     }
     .name{
-        padding-top: 20px;
+        padding-top: 20px; //TODO
         color: $offwhite;
         text-align: center;
     }
@@ -117,12 +124,8 @@ body {
 
 
     .socials{
-        
-        width: 25%;
-        position: absolute;
-        bottom: 15px;
-        margin-left: 3%;
-        padding-top: 25px;
+        bottom: 3%;
+        padding-top: 5%;
 
     }
     a{

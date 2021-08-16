@@ -6,6 +6,12 @@ html {
   overflow: hidden;
 }
 
+@media only screen and (max-width: 768px) {
+  html {
+    overflow: visible;
+  }
+}
+
 body {
   font-family: "Open Sans", sans-serif;
 }
@@ -35,10 +41,15 @@ body .bg {
           filter: drop-shadow(-8px 8px 6px #131414);
 }
 
+@media only screen and (min-width: 768px) {
+  body .bg {
+    max-height: 80vh;
+  }
+}
+
 body .my-img {
-  height: 256px;
-  width: 256px;
-  margin-top: -25%;
+  height: 65%;
+  width: 65%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -62,7 +73,7 @@ body .right {
   background-color: #FDFAF6;
   border-bottom-right-radius: 12px;
   border-top-right-radius: 12px;
-  max-height: 693px;
+  max-height: 80vh;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -125,11 +136,8 @@ body .barText {
 }
 
 body .socials {
-  width: 25%;
-  position: absolute;
-  bottom: 15px;
-  margin-left: 3%;
-  padding-top: 25px;
+  bottom: 3%;
+  padding-top: 5%;
 }
 
 body a {
