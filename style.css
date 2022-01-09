@@ -1,4 +1,4 @@
-@import url(c:\Users\zachy\OneDrive\Documents\website\bulma.css);
+@import url("https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 html {
@@ -128,6 +128,10 @@ body .name {
 
 body .subtitle {
   color: #1e2022;
+}
+
+body .description {
+  color: #f0f5f9;
 }
 
 body .subtext {
