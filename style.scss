@@ -17,13 +17,14 @@ html{
 body { 
     font-family: "Open Sans", sans-serif;
 
-    @media only screen and (max-width: 1280px){
+    @media only screen and (max-width: 768px){
         .title.is-2{
             font-size: xx-large;
         }
         .subtitle{
             font-size: medium;
         }
+        margin-bottom: 5%;
     }
     
     ::selection {
@@ -69,6 +70,13 @@ body {
         background-color: #FDFAF6;
         border-bottom-right-radius: 12px;
         border-top-right-radius: 12px;
+
+        @media only screen and (max-width: 768px){
+            border-bottom-right-radius: 12px;
+            border-top-right-radius: 0px;
+            border-bottom-left-radius: 12px;
+        }
+
         max-height: 80vh;
 
         -webkit-touch-callout: none;
@@ -81,6 +89,9 @@ body {
     .right::-webkit-scrollbar {
     width: 8px;
     height: 100px;
+    @media only screen and (max-width: 900px){
+        display: none;
+    }
   }
 
   .right::-webkit-scrollbar-track {
