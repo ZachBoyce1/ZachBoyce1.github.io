@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/dist/output.css" rel="stylesheet">
+</head>
+
+<script>
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+  function toggle(){
+    localStorage.theme = localStorage.theme === 'dark' ? 'light' : 'dark'
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }
+
+</script>
+<body class="bg-white dark:bg-zinc-900 sm:mx-64 sm:mb-36 sm:mt-10 m-8">
+  <button class="absolute group w-4 h-4" onclick="toggle()">
+    <svg class="hidden dark:block fill-white w-4 h-4" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M144.7 98.7c-21 34.1-33.1 74.3-33.1 117.3c0 98 62.8 181.4 150.4 211.7c-12.4 2.8-25.3 4.3-38.6 4.3C126.6 432 48 353.3 48 256c0-68.9 39.4-128.4 96.8-157.3zm62.1-66C91.1 41.2 0 137.9 0 256C0 379.7 100 480 223.5 480c47.8 0 92-15 128.4-40.6c1.9-1.3 3.7-2.7 5.5-4c4.8-3.6 9.4-7.4 13.9-11.4c2.7-2.4 5.3-4.8 7.9-7.3c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-3.7 .6-7.4 1.2-11.1 1.6c-5 .5-10.1 .9-15.3 1c-1.2 0-2.5 0-3.7 0c-.1 0-.2 0-.3 0c-96.8-.2-175.2-78.9-175.2-176c0-54.8 24.9-103.7 64.1-136c1-.9 2.1-1.7 3.2-2.6c4-3.2 8.2-6.2 12.5-9c3.1-2 6.3-4 9.6-5.8c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-3.6-.3-7.1-.5-10.7-.6c-2.7-.1-5.5-.1-8.2-.1c-3.3 0-6.5 .1-9.8 .2c-2.3 .1-4.6 .2-6.9 .4z"/></svg>
+    <svg class="dark:hidden w-4 h-4" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M375.7 19.7c-1.5-8-6.9-14.7-14.4-17.8s-16.1-2.2-22.8 2.4L256 61.1 173.5 4.2c-6.7-4.6-15.3-5.5-22.8-2.4s-12.9 9.8-14.4 17.8l-18.1 98.5L19.7 136.3c-8 1.5-14.7 6.9-17.8 14.4s-2.2 16.1 2.4 22.8L61.1 256 4.2 338.5c-4.6 6.7-5.5 15.3-2.4 22.8s9.8 13 17.8 14.4l98.5 18.1 18.1 98.5c1.5 8 6.9 14.7 14.4 17.8s16.1 2.2 22.8-2.4L256 450.9l82.5 56.9c6.7 4.6 15.3 5.5 22.8 2.4s12.9-9.8 14.4-17.8l18.1-98.5 98.5-18.1c8-1.5 14.7-6.9 17.8-14.4s2.2-16.1-2.4-22.8L450.9 256l56.9-82.5c4.6-6.7 5.5-15.3 2.4-22.8s-9.8-12.9-17.8-14.4l-98.5-18.1L375.7 19.7zM269.6 110l65.6-45.2 14.4 78.3c1.8 9.8 9.5 17.5 19.3 19.3l78.3 14.4L402 242.4c-5.7 8.2-5.7 19 0 27.2l45.2 65.6-78.3 14.4c-9.8 1.8-17.5 9.5-19.3 19.3l-14.4 78.3L269.6 402c-8.2-5.7-19-5.7-27.2 0l-65.6 45.2-14.4-78.3c-1.8-9.8-9.5-17.5-19.3-19.3L64.8 335.2 110 269.6c5.7-8.2 5.7-19 0-27.2L64.8 176.8l78.3-14.4c9.8-1.8 17.5-9.5 19.3-19.3l14.4-78.3L242.4 110c8.2 5.7 19 5.7 27.2 0zM256 368a112 112 0 1 0 0-224 112 112 0 1 0 0 224zM192 256a64 64 0 1 1 128 0 64 64 0 1 1 -128 0z"/></svg>
+    <span class="absolute w-auto p-2 m-2 min-w-max rounded-md shadow-md left-14 bg-white text-zinc-900 dark:text-white dark:bg-zinc-800 text-xs font-bold
+                 transition-all duration-0 scale-0 group-hover:scale-100 origin-left">
+      Toggle Dark Mode
+    </span>
+  </button>
+  <div class="flex flex-col items-center">
+
+      <div class="flex flex-col-reverse max-w-lg items-center">
+        <div class=" m-2 flex flex-row">
+          <a class="mr-5" href="https://www.linkedin.com/in/zach-boyce-001/" target="_blank" rel="noopener noreferrer">
+            <svg class="dark:fill-white" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+          </a>
+          <a href="https://twitter.com/ZachFBoyce" target="_blank" rel="noopener noreferrer">
+            <svg class="dark:fill-white" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+          </a>
+        </div>
+        <div class="flex flex-col content-center">
+          <h1 class=" text-4xl text-center font-bold text-zinc-900 dark:text-white">
+            Zach Boyce
+          </h1>
+          <p class="text-lg text-center text-zinc-500 dark:text-zinc-400">
+            <strong>SDE1</strong> at Amazon Web Services
+          </p>
+        </div>
+        <img class="h-48 w-48 rounded-full my-5" 
+        src="/src/profile.jpg">
+      </div>
+
+    <div>
+      <section class="mt-20">
+    
+
+    <div>
+      <h1 class="text-4xl font-bold my-10 text-zinc-900 dark:text-white">Related Experience/Projects</h1>
+      <ul>
+
+        <li>
+          <h1 class="text-2xl font-semibold text-zinc-900 dark:text-white">Software Development Engineering Intern - <a class="text-blue-500" href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer">Amazon Web Services</a> Summer 2022</h1>
+           <p class="text-zinc-500 dark:text-zinc-400">Worked for Amazon Web Services as a Software Development Engineering Intern in Seattle.
+            Working within <strong>EC2 Networking</strong>, created a tool for Dataplane Engineers to quickly test their code from their personal AWS accounts,
+            and receive meaningful feedback and metrics on the performance impacts of their code as it relates to network performance. 
+            Created a <strong>custom network protocol implementation</strong> using <strong>Lua</strong> to replicate customer traffic for more useful testing.
+           </p>
+        </li>
+        
+
+        <li>
+          <h1 class="text-2xl font-semibold text-zinc-900 dark:text-white"><br>Software Development Intern - <a class="text-blue-500" href="https://prevedere.com/" target="_blank" rel="noopener noreferrer">Prevedere</a> Summer 2021</h1>
+           <p class="text-zinc-500 dark:text-zinc-400">Worked for Prevedere, the leader in external
+           data and predictive analytics software for intelligent forecasting,
+           as a Software Development Intern, doing full stack development using mostly <strong>C#, Typescript, SQL and the .NET framework</strong>
+           as well as <strong>Azure DevOps</strong>. Resolved <strong>50+</strong> bugs in production, implemented
+           new frontend features for users including an overhaul in Client Data integration visuals and brand new features to global search, migrated multiple API services to a
+           more secure system, modified and updated databases with over 3
+           million individual indicators, and learned a lot! </p>
+         </li>
+
+        <li>
+          <h1 class="text-2xl font-semibold text-zinc-900 dark:text-white"><br>Hack OHI/O 2020 -
+          Space Team</h1>
+          <p class="text-zinc-500 dark:text-zinc-400">Created an interactive risk assessment tool
+          for prospective homebuyers or business owners during a two day
+          hackathon using JavaScript and HTML/CSS with no prior experience in
+          web development/design</p>
+        </li>
+
+        <li>
+          <h1 class="text-2xl font-semibold text-zinc-900 dark:text-white"><br>Personal Resume Website</h1>
+          <p class="text-zinc-500 dark:text-zinc-400">Created the website you're on right now!</p>
+        </li>
+
+      </ul>
+    </div>
+      </section>
+    </div>
+
+  </div>
+</body>
+</html>
