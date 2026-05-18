@@ -1,573 +1,1292 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Denver → Seattle · National Park Road Trip 2027</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          'trip-amber': '#E8A040',
-          'deep-sky': '#1E3A5A',
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Denver → Seattle · National Park Road Trip 2027</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "trip-amber": "#E8A040",
+              "deep-sky": "#1E3A5A",
+            },
+            fontFamily: {
+              playfair: ['"Playfair Display"', "serif"],
+              dm: ['"DM Sans"', "sans-serif"],
+            },
+          },
         },
-        fontFamily: {
-          playfair: ['"Playfair Display"', 'serif'],
-          dm: ['"DM Sans"', 'sans-serif'],
-        },
+      };
+    </script>
+    <style>
+      .tab-btn:hover {
+        color: #1a1a1a;
       }
-    }
-  }
-</script>
-<style>
-  .tab-btn:hover { color: #1A1A1A; }
-  .tab-btn.active { color: #1A1A1A; font-weight: 500; border-bottom-color: #1A1A1A; }
-</style>
-</head>
-<body class="font-dm bg-[#F8F5F0] text-[#1A1A1A] min-h-screen">
-
-<header class="bg-deep-sky text-white px-10 pt-[52px] pb-11 max-sm:px-5 max-sm:pt-9 max-sm:pb-8">
-  <div class="max-w-[860px] mx-auto">
-    <div class="text-[11px] font-medium tracking-[0.18em] uppercase text-white/45 mb-3.5">Summer 2027 · Road Trip Planner</div>
-    <h1 class="font-playfair text-[clamp(36px,5.5vw,58px)] font-bold leading-[1.05] mb-3.5">Denver <em class="text-trip-amber not-italic">→</em> Seattle</h1>
-    <p class="text-[15px] text-white/60 max-w-[460px] leading-[1.75] font-light">Two routes through the American West. Five national parks each. Pick your landscape.</p>
-    <div class="flex gap-2.5 mt-7 flex-wrap">
-      <span class="bg-white/[0.09] border border-white/[0.14] rounded-full px-4 py-1.5 text-xs font-medium text-white/75">✦ 10–14 days</span>
-      <span class="bg-white/[0.09] border border-white/[0.14] rounded-full px-4 py-1.5 text-xs font-medium text-white/75">✦ Summer 2027</span>
-      <span class="bg-white/[0.09] border border-white/[0.14] rounded-full px-4 py-1.5 text-xs font-medium text-white/75">✦ 5 national parks per route</span>
-    </div>
-  </div>
-</header>
-
-<div class="bg-white border-b border-black/[0.08] sticky top-0 z-[100] shadow-[0_1px_12px_rgba(0,0,0,0.04)]">
-  <div class="max-w-[860px] mx-auto flex px-10 max-sm:px-5">
-    <button class="tab-btn active px-[22px] py-4 border-0 bg-transparent font-dm text-sm cursor-pointer border-b-2 border-transparent -mb-px transition-colors duration-150" onclick="showRoute('sw', this)">🏜️ Southwest Route</button>
-    <button class="tab-btn px-[22px] py-4 border-0 bg-transparent font-dm text-sm font-normal text-[#999] cursor-pointer border-b-2 border-transparent -mb-px transition-colors duration-150" onclick="showRoute('nw', this)">🏔️ Northwest Route</button>
-  </div>
-</div>
-
-<main class="max-w-[860px] mx-auto px-10 pt-11 pb-[100px] max-sm:px-5 max-sm:pt-7 max-sm:pb-[60px]">
-
-<!-- ══════════ SOUTHWEST ══════════ -->
-<div id="sw" class="route-panel">
-
-  <div class="grid grid-cols-[1fr_1px_1fr_1px_1fr] bg-white border border-black/[0.08] rounded-2xl mb-10 overflow-hidden max-sm:grid-cols-1">
-    <div class="py-[22px] px-5 text-center">
-      <div class="font-playfair text-[30px] font-bold leading-none">~2,350</div>
-      <div class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]">Total miles</div>
-    </div>
-    <div class="bg-black/[0.08] max-sm:hidden"></div>
-    <div class="py-[22px] px-5 text-center">
-      <div class="font-playfair text-[30px] font-bold leading-none">10–13</div>
-      <div class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]">Days</div>
-    </div>
-    <div class="bg-black/[0.08] max-sm:hidden"></div>
-    <div class="py-[22px] px-5 text-center">
-      <div class="font-playfair text-[30px] font-bold leading-none">5</div>
-      <div class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]">National Parks</div>
-    </div>
-  </div>
-
-  <div class="flex flex-col">
-
-    <!-- Denver Start -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]">▶</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <div class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Start · Day 1</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Denver, Colorado</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Gear up, fill the tank, grab breakfast on Colfax. Hit I-70 West early — it's a 6-hour drive to Moab and you'll want daylight when you arrive in canyon country.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]">Departure</span>
-          </div>
+      .tab-btn.active {
+        color: #1a1a1a;
+        font-weight: 500;
+        border-bottom-color: #1a1a1a;
+      }
+    </style>
+  </head>
+  <body class="font-dm bg-[#F8F5F0] text-[#1A1A1A] min-h-screen">
+    <header
+      class="bg-deep-sky text-white px-10 pt-[52px] pb-11 max-sm:px-5 max-sm:pt-9 max-sm:pb-8"
+    >
+      <div class="max-w-[860px] mx-auto">
+        <div
+          class="text-[11px] font-medium tracking-[0.18em] uppercase text-white/45 mb-3.5"
+        >
+          Summer 2027 · Road Trip Planner
+        </div>
+        <h1
+          class="font-playfair text-[clamp(36px,5.5vw,58px)] font-bold leading-[1.05] mb-3.5"
+        >
+          Denver <em class="text-trip-amber not-italic">→</em> Seattle
+        </h1>
+        <p
+          class="text-[15px] text-white/60 max-w-[460px] leading-[1.75] font-light"
+        >
+          Two routes through the American West. Five national parks each. Pick
+          your landscape.
+        </p>
+        <div class="flex gap-2.5 mt-7 flex-wrap">
+          <span
+            class="bg-white/[0.09] border border-white/[0.14] rounded-full px-4 py-1.5 text-xs font-medium text-white/75"
+            >✦ 10–14 days</span
+          >
+          <span
+            class="bg-white/[0.09] border border-white/[0.14] rounded-full px-4 py-1.5 text-xs font-medium text-white/75"
+            >✦ Summer 2027</span
+          >
+          <span
+            class="bg-white/[0.09] border border-white/[0.14] rounded-full px-4 py-1.5 text-xs font-medium text-white/75"
+            >✦ 5 national parks per route</span
+          >
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 6 hrs · 360 mi — I-70 W + US-191 S to Moab</div>
-    </div>
-
-    <!-- Arches -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]">★★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+    <div
+      class="bg-white border-b border-black/[0.08] sticky top-0 z-[100] shadow-[0_1px_12px_rgba(0,0,0,0.04)]"
+    >
+      <div class="max-w-[860px] mx-auto flex px-10 max-sm:px-5">
+        <button
+          class="tab-btn active px-[22px] py-4 border-0 bg-transparent font-dm text-sm cursor-pointer border-b-2 border-transparent -mb-px transition-colors duration-150"
+          onclick="showRoute('sw', this)"
+        >
+          🏜️ Southwest Route
+        </button>
+        <button
+          class="tab-btn px-[22px] py-4 border-0 bg-transparent font-dm text-sm font-normal text-[#999] cursor-pointer border-b-2 border-transparent -mb-px transition-colors duration-150"
+          onclick="showRoute('nw', this)"
+        >
+          🏔️ Northwest Route
+        </button>
       </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/arch/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Delicate_arch_sunset.jpg/1920px-Delicate_arch_sunset.jpg"
-          alt="Delicate Arch at sunset, Arches National Park, Utah">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 2–3 · 1 night in Moab</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Arches National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Full day — Delicate Arch hike (start before 7am to beat the heat and crowds), Windows Section, Balanced Rock. Over 2,000 natural sandstone arches. Timed entry reservations required in summer — book months in advance at recreation.gov.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]">Days 2–3 · 1 night</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.8</span>
+    </div>
+
+    <main
+      class="max-w-[860px] mx-auto px-10 pt-11 pb-[100px] max-sm:px-5 max-sm:pt-7 max-sm:pb-[60px]"
+    >
+      <!-- ══════════ SOUTHWEST ══════════ -->
+
+      <div id="sw" class="route-panel">
+        <div
+          class="grid grid-cols-[1fr_1px_1fr_1px_1fr] bg-white border border-black/[0.08] rounded-2xl mb-10 overflow-hidden max-sm:grid-cols-1"
+        >
+          <div class="py-[22px] px-5 text-center">
+            <div class="font-playfair text-[30px] font-bold leading-none">
+              ~2,350
+            </div>
+            <div
+              class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]"
+            >
+              Total miles
+            </div>
+          </div>
+          <div class="bg-black/[0.08] max-sm:hidden"></div>
+          <div class="py-[22px] px-5 text-center">
+            <div class="font-playfair text-[30px] font-bold leading-none">
+              10–13
+            </div>
+            <div
+              class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]"
+            >
+              Days
+            </div>
+          </div>
+          <div class="bg-black/[0.08] max-sm:hidden"></div>
+          <div class="py-[22px] px-5 text-center">
+            <div class="font-playfair text-[30px] font-bold leading-none">
+              5
+            </div>
+            <div
+              class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]"
+            >
+              National Parks
+            </div>
           </div>
         </div>
-      </a>
-    </div>
 
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 30 min · 20 mi — Moab to Canyonlands Island in the Sky</div>
-    </div>
-
-    <!-- Canyonlands -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]">★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/cany/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Green_River_Overlook_Ekker_Butte.jpg/1920px-Green_River_Overlook_Ekker_Butte.jpg"
-          alt="Green River Overlook, Canyonlands National Park, Utah">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Day 3 · Half Day</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Canyonlands National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Half-day drive-by — Mesa Arch at sunrise perfectly frames the canyon below, Grand View Point overlook. Then continue southwest toward Bryce. Worth the short detour from Moab.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]">Day 3 · half day</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.8</span>
+        <div class="flex items-start">
+          <div
+            class="flex-1 mb-10 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m72!1m8!1m3!1d6046443.705091665!2d-119.304324!3d42.2707294!3m2!1i1024!2i768!4f13.1!4m61!3e0!4m5!1s0x876b80aa231f17cf%3A0x118ef4f8278a36d6!2sDenver%2C%20Colorado!3m2!1d39.739235799999996!2d-104.990251!4m5!1s0x80caf61a860daa51%3A0x4f42ea69d128c495!2sArches%20National%20Park%2C%20Utah!3m2!1d38.7328166!2d-109.5746222!4m5!1s0x8747e1ee4518a6a9%3A0x15a452a9c502e6aa!2sCanyonlands%20National%20Park%2C%20Utah!3m2!1d38.2135733!2d-109.9025345!4m5!1s0x87356bc602c3eb2d%3A0x6be9d8fbbeac6d06!2sBryce%20Canyon%20National%20Park%2C%20Utah!3m2!1d37.5930377!2d-112.1870895!4m5!1s0x80caead08844f8d9%3A0x7c2e3a15aa3656f5!2sZion%20National%20Park%2C%20Utah!3m2!1d37.2982022!2d-113.02630049999999!4m5!1s0x87523d9488d131ed%3A0x5b53b7a0484d31ca!2sSalt%20Lake%20City%2C%20Utah!3m2!1d40.7605601!2d-111.8881397!4m5!1s0x54aef172e947b49d%3A0x9a5b989b36679d9b!2sBoise%2C%20Idaho!3m2!1d43.6150186!2d-116.20231369999999!4m5!1s0x54c6170840e5e339%3A0x902bf2e1452fe3a3!2sCrater%20Lake%20National%20Park%2C%20Oregon!3m2!1d42.929476199999996!2d-122.12793939999999!4m5!1s0x5490cde6eec94b87%3A0x5cf4a1fb4f91a418!2sMount%20Rainier%20National%20Park%2C%20Washington!3m2!1d46.8671484!2d-121.69985589999999!4m5!1s0x5490102c93e83355%3A0x102565466944d59a!2sSeattle%2C%20Washington!3m2!1d47.6061389!2d-122.33284809999999!5e0!3m2!1sen!2sus!4v1779071009281!5m2!1sen!2sus"
+              width="900"
+              height="350"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
-      </a>
-    </div>
 
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 3.5 hrs · 200 mi — UT-12 Scenic Byway to Bryce Canyon</div>
-    </div>
+        <div class="flex flex-col">
+          <!-- Denver Start -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]"
+              >
+                ▶
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <div
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+            >
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Start · Day 1
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Denver, Colorado
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Gear up, fill the tank, grab breakfast on Colfax. Hit I-70
+                  West early — it's a 6-hour drive to Moab and you'll want
+                  daylight when you arrive in canyon country.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]"
+                    >Departure</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <!-- Bryce -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]">★★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/brca/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Bryce_Point_Bryce_Canyon_November_2018_001.jpg/1920px-Bryce_Point_Bryce_Canyon_November_2018_001.jpg"
-          alt="Bryce Point hoodoo amphitheater, Bryce Canyon National Park, Utah">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 4–5 · 1–2 nights</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Bryce Canyon National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">1.5 days — sunrise at Sunrise Point, Navajo Loop down into the hoodoos, Rim Trail to Inspiration Point. One of the most photogenic parks on earth and the best park-per-hour ratio on the entire route. Don't skip it.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]">Days 4–5 · 1–2 nights</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.9</span>
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 6 hrs · 360 mi — I-70 W + US-191 S to Moab
+            </div>
+          </div>
+
+          <!-- Arches -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]"
+              >
+                ★★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/arch/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Delicate_arch_sunset.jpg/1920px-Delicate_arch_sunset.jpg"
+                alt="Delicate Arch at sunset, Arches National Park, Utah"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 2–3 · 1 night in Moab
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Arches National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Full day — Delicate Arch hike (start before 7am to beat the
+                  heat and crowds), Windows Section, Balanced Rock. Over 2,000
+                  natural sandstone arches. Timed entry reservations required in
+                  summer — book months in advance at recreation.gov.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]"
+                    >Days 2–3 · 1 night</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.8</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 30 min · 20 mi — Moab to Canyonlands Island in the Sky
+            </div>
+          </div>
+
+          <!-- Canyonlands -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]"
+              >
+                ★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/cany/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Green_River_Overlook_Ekker_Butte.jpg/1920px-Green_River_Overlook_Ekker_Butte.jpg"
+                alt="Green River Overlook, Canyonlands National Park, Utah"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Day 3 · Half Day
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Canyonlands National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Half-day drive-by — Mesa Arch at sunrise perfectly frames the
+                  canyon below, Grand View Point overlook. Then continue
+                  southwest toward Bryce. Worth the short detour from Moab.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]"
+                    >Day 3 · half day</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.8</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 3.5 hrs · 200 mi — UT-12 Scenic Byway to Bryce Canyon
+            </div>
+          </div>
+
+          <!-- Bryce -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]"
+              >
+                ★★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/brca/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Bryce_Point_Bryce_Canyon_November_2018_001.jpg/1920px-Bryce_Point_Bryce_Canyon_November_2018_001.jpg"
+                alt="Bryce Point hoodoo amphitheater, Bryce Canyon National Park, Utah"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 4–5 · 1–2 nights
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Bryce Canyon National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  1.5 days — sunrise at Sunrise Point, Navajo Loop down into the
+                  hoodoos, Rim Trail to Inspiration Point. One of the most
+                  photogenic parks on earth and the best park-per-hour ratio on
+                  the entire route. Don't skip it.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]"
+                    >Days 4–5 · 1–2 nights</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.9</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 1.5 hrs · 83 mi — US-89 S to Zion
+            </div>
+          </div>
+
+          <!-- Zion -->
+          <div class="flex items-start mt-[5px]">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]"
+              >
+                ★★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/zion/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Zion_angels_landing_view.jpg/1920px-Zion_angels_landing_view.jpg"
+                alt="Angels Landing view, Zion National Park"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 6–7 · 2 nights
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Zion National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  2 days — Angels Landing (permit lottery required at
+                  recreation.gov), Canyon Overlook Trail, Riverside Walk into
+                  The Narrows. One of the most visited parks in the US — book
+                  lodging months in advance. The summer shuttle makes the main
+                  canyon car-free.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]"
+                    >Days 6–7 · 2 nights</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.8</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 4.5 hrs · 300 mi — I-15 N to Salt Lake City, then I-84 W toward
+              Boise
+            </div>
+          </div>
+
+          <!-- SLC → Boise transit -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]"
+              >
+                ⛽
+              </div>
+              <div
+                class="w-px flex-1 min-h-3.5 mt-[5px] [background:repeating-linear-gradient(to_bottom,#E4E4E4_0,#E4E4E4_5px,transparent_5px,transparent_11px)]"
+              ></div>
+            </div>
+            <div
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+            >
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Day 8 · Transit
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Salt Lake City → Boise
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Long haul north. Overnight in Twin Falls or Boise to break up
+                  the drive. Twin Falls has Shoshone Falls nearby if you want a
+                  quick detour.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]"
+                    >Transit night</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 3 hrs from Boise · 220 mi — US-20 W + OR-62 to Crater Lake
+            </div>
+          </div>
+
+          <!-- Crater Lake -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]"
+              >
+                ★★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/crla/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Crater_lake_oregon.jpg/1920px-Crater_lake_oregon.jpg"
+                alt="Crater Lake, Oregon"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 9–10 · 1 night
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Crater Lake National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Full Rim Drive (33 miles), Watchman Peak hike, Cleetwood Cove
+                  trail to the water's edge. The deepest lake in the US, filled
+                  entirely by rain and snow — the blue is surreal in person.
+                  Worth every mile of Oregon detour.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]"
+                    >Days 9–10 · 1 night</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.9</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 4.5 hrs · 290 mi — OR-138 W + I-5 N + US-12 E to Rainier
+            </div>
+          </div>
+
+          <!-- Rainier (SW) -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]"
+              >
+                ★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/mora/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Mount_Rainier_8164s.JPG/1920px-Mount_Rainier_8164s.JPG"
+                alt="Mount Rainier, Washington"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 11–12 · 1 night
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Mount Rainier National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Skyline Trail loop from Paradise, Myrtle Falls, Reflection
+                  Lakes. Peak wildflowers bloom July–August — timing this trip
+                  right means an unforgettable finish. Then 2.5 hrs into
+                  Seattle.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]"
+                    >Days 11–12 · 1 night</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.9</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 2.5 hrs · 90 mi — WA-7 N + I-5 N to Seattle
+            </div>
+          </div>
+
+          <!-- Seattle (SW) -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]"
+              >
+                ■
+              </div>
+            </div>
+            <div
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+            >
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Day 12–13 · Finish
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Seattle, Washington
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Pike Place Market, fresh salmon, rest, and legendary stories
+                  with your cousins. Well earned.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]"
+                    >Final destination</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </a>
-    </div>
 
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 1.5 hrs · 83 mi — US-89 S to Zion</div>
-    </div>
-
-    <!-- Zion -->
-    <div class="flex items-start mt-[5px]">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]">★★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/zion/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Zion_angels_landing_view.jpg/1920px-Zion_angels_landing_view.jpg"
-          alt="Angels Landing view, Zion National Park">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 6–7 · 2 nights</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Zion National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">2 days — Angels Landing (permit lottery required at recreation.gov), Canyon Overlook Trail, Riverside Walk into The Narrows. One of the most visited parks in the US — book lodging months in advance. The summer shuttle makes the main canyon car-free.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]">Days 6–7 · 2 nights</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.8</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 4.5 hrs · 300 mi — I-15 N to Salt Lake City, then I-84 W toward Boise</div>
-    </div>
-
-    <!-- SLC → Boise transit -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]">⛽</div>
-        <div class="w-px flex-1 min-h-3.5 mt-[5px] [background:repeating-linear-gradient(to_bottom,#E4E4E4_0,#E4E4E4_5px,transparent_5px,transparent_11px)]"></div>
-      </div>
-      <div class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Day 8 · Transit</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Salt Lake City → Boise</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Long haul north. Overnight in Twin Falls or Boise to break up the drive. Twin Falls has Shoshone Falls nearby if you want a quick detour.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]">Transit night</span>
-          </div>
+        <div
+          class="mt-11 px-[26px] py-[22px] bg-white rounded-2xl border border-black/[0.08] [border-left:4px_solid_#E8A040]"
+        >
+          <h3 class="font-playfair text-[17px] mb-3">
+            ⚠️ Book these early for Summer 2027
+          </h3>
+          <ul class="list-disc pl-[18px] flex flex-col gap-1.5">
+            <li class="text-[13px] text-[#666] leading-[1.65]">
+              <strong class="text-[#1A1A1A] font-medium">Arches NP</strong> —
+              Timed entry reservations open months in advance and sell out fast
+              (recreation.gov).
+            </li>
+            <li class="text-[13px] text-[#666] leading-[1.65]">
+              <strong class="text-[#1A1A1A] font-medium"
+                >Zion — Angels Landing</strong
+              >
+              — Permit lottery required. Apply early at recreation.gov.
+            </li>
+            <li class="text-[13px] text-[#666] leading-[1.65]">
+              <strong class="text-[#1A1A1A] font-medium">Zion lodging</strong> —
+              Book 6+ months out. Fills completely in summer.
+            </li>
+            <li class="text-[13px] text-[#666] leading-[1.65]">
+              <strong class="text-[#1A1A1A] font-medium"
+                >Crater Lake lodging</strong
+              >
+              — Limited options, books quickly for July–August.
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
 
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 3 hrs from Boise · 220 mi — US-20 W + OR-62 to Crater Lake</div>
-    </div>
-
-    <!-- Crater Lake -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]">★★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/crla/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Crater_lake_oregon.jpg/1920px-Crater_lake_oregon.jpg"
-          alt="Crater Lake, Oregon">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 9–10 · 1 night</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Crater Lake National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Full Rim Drive (33 miles), Watchman Peak hike, Cleetwood Cove trail to the water's edge. The deepest lake in the US, filled entirely by rain and snow — the blue is surreal in person. Worth every mile of Oregon detour.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]">Days 9–10 · 1 night</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.9</span>
+      <!-- ══════════ NORTHWEST ══════════ -->
+      <div id="nw" class="route-panel hidden">
+        <div
+          class="grid grid-cols-[1fr_1px_1fr_1px_1fr] bg-white border border-black/[0.08] rounded-2xl mb-10 overflow-hidden max-sm:grid-cols-1"
+        >
+          <div class="py-[22px] px-5 text-center">
+            <div class="font-playfair text-[30px] font-bold leading-none">
+              ~2,000
+            </div>
+            <div
+              class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]"
+            >
+              Total miles
+            </div>
+          </div>
+          <div class="bg-black/[0.08] max-sm:hidden"></div>
+          <div class="py-[22px] px-5 text-center">
+            <div class="font-playfair text-[30px] font-bold leading-none">
+              11–14
+            </div>
+            <div
+              class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]"
+            >
+              Days
+            </div>
+          </div>
+          <div class="bg-black/[0.08] max-sm:hidden"></div>
+          <div class="py-[22px] px-5 text-center">
+            <div class="font-playfair text-[30px] font-bold leading-none">
+              5
+            </div>
+            <div
+              class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]"
+            >
+              National Parks
+            </div>
           </div>
         </div>
-      </a>
-    </div>
 
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 4.5 hrs · 290 mi — OR-138 W + I-5 N + US-12 E to Rainier</div>
-    </div>
-
-    <!-- Rainier (SW) -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#FFF4E5] border-[#F0A840] text-[#8B4010]">★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/mora/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Mount_Rainier_8164s.JPG/1920px-Mount_Rainier_8164s.JPG"
-          alt="Mount Rainier, Washington">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 11–12 · 1 night</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Mount Rainier National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Skyline Trail loop from Paradise, Myrtle Falls, Reflection Lakes. Peak wildflowers bloom July–August — timing this trip right means an unforgettable finish. Then 2.5 hrs into Seattle.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#FFF4E5] text-[#904010]">Days 11–12 · 1 night</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.9</span>
+        <div class="flex items-start">
+          <div
+            class="flex-1 mb-10 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m70!1m12!1m3!1d5864555.532030121!2d-119.56825298546555!3d44.13385154979169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m55!3e0!4m5!1s0x876b80aa231f17cf%3A0x118ef4f8278a36d6!2sDenver%2C%20Colorado!3m2!1d39.739235799999996!2d-104.990251!4m5!1s0x5352519ec95d1ba9%3A0xa5a0b88ecc91a337!2sGrand%20Teton%20National%20Park%2C%20Wyoming!3m2!1d43.7904282!2d-110.6817627!4m5!1s0x5351e55555555555%3A0xaca8f930348fe1bb!2sYellowstone%20National%20Park!3m2!1d44.597918199999995!2d-110.56124899999999!4m5!1s0x536650959ceac247%3A0xaf1fbdda1d5abb62!2sKalispell%2C%20Montana%2059901!3m2!1d48.1919889!2d-114.316813!4m5!1s0x5368901555555555%3A0xaf16bc2215c55dec!2sGlacier%20National%20Park%2C%20Montana!3m2!1d48.756063!2d-113.77973159999999!4m5!1s0x549e185c30bbe7e5%3A0xddfcc9d60b84d9b1!2sSpokane%2C%20Washington!3m2!1d47.6579711!2d-117.42353179999999!4m5!1s0x5490cde6eec94b87%3A0x5cf4a1fb4f91a418!2sMount%20Rainier%20National%20Park%2C%20Washington!3m2!1d46.8671484!2d-121.69985589999999!4m5!1s0x5490102c93e83355%3A0x102565466944d59a!2sSeattle%2C%20Washington!3m2!1d47.6061389!2d-122.33284809999999!4m5!1s0x548e8009cf0472d1%3A0x2087abb27d7951!2sOlympic%20National%20Park%2C%203002%20Mt%20Angeles%20Rd%2C%20Port%20Angeles%2C%20WA%2098362!3m2!1d47.802106699999996!2d-123.6043524!5e0!3m2!1sen!2sus!4v1779072050557!5m2!1sen!2sus"
+              width="900"
+              height="350"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
-      </a>
-    </div>
 
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 2.5 hrs · 90 mi — WA-7 N + I-5 N to Seattle</div>
-    </div>
+        <div class="flex flex-col">
+          <!-- Denver Start (NW) -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]"
+              >
+                ▶
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <div
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+            >
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Start · Day 1
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Denver, Colorado
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Early departure recommended — it's a full 7-hour drive to
+                  Jackson Hole. Grab coffee and get moving. The Tetons will make
+                  it worth it.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]"
+                    >Departure</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <!-- Seattle (SW) -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]">■</div>
-      </div>
-      <div class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Day 12–13 · Finish</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Seattle, Washington</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Pike Place Market, fresh salmon, rest, and legendary stories with your cousins. Well earned.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]">Final destination</span>
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 7 hrs · 440 mi — I-25 N + US-287 N to Jackson, WY
+            </div>
+          </div>
+
+          <!-- Grand Teton -->
+          <div class="flex items-start mt-[5px]">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]"
+              >
+                ★★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/grte/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Oxbow_Bend_-_Grand_Teton_National_Park_-_Wyoming.jpg/1920px-Oxbow_Bend_-_Grand_Teton_National_Park_-_Wyoming.jpg"
+                alt="Oxbow Bend, Grand Teton National Park, Wyoming"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 2–3 · 2 nights in Jackson
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Grand Teton National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  1.5–2 days — Jenny Lake loop, Oxbow Bend for moose and elk at
+                  dawn, Snake River Overlook. Arguably the most dramatic
+                  mountain skyline in the continental US. Jackson Hole is an
+                  excellent base for food and lodging.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]"
+                    >Days 2–3 · 2 nights</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.9</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 1 hr · 60 mi — US-89/191 N straight into Yellowstone's south
+              entrance
+            </div>
+          </div>
+
+          <!-- Yellowstone -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]"
+              >
+                ★★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/yell/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Grand_Prismatic_Spring_2013.jpg/1920px-Grand_Prismatic_Spring_2013.jpg"
+                alt="Grand Prismatic Spring, Yellowstone National Park"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 4–5 · 2 nights inside the park
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Yellowstone National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  2 full days — Old Faithful and the Upper Geyser Basin, Grand
+                  Prismatic Spring (hike the Fairy Falls trail for the aerial
+                  view), Grand Canyon of the Yellowstone, Lamar Valley wildlife
+                  drive at dawn and dusk for bison, wolves, and bears. Book
+                  lodging 13 months in advance.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]"
+                    >Days 4–5 · 2 nights</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.8</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 4 hrs · 245 mi — US-89 N + US-93 N to Kalispell, MT
+            </div>
+          </div>
+
+          <!-- Kalispell transit -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]"
+              >
+                ⛽
+              </div>
+              <div
+                class="w-px flex-1 min-h-3.5 mt-[5px] [background:repeating-linear-gradient(to_bottom,#E4E4E4_0,#E4E4E4_5px,transparent_5px,transparent_11px)]"
+              ></div>
+            </div>
+            <div
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+            >
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Day 6 · Transit
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Kalispell, Montana
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Gateway town to Glacier. Good restaurants, easy overnight.
+                  Stock up on snacks and bear spray before hitting the park
+                  tomorrow.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]"
+                    >Transit night</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 35 min · 30 mi — US-2 E to Glacier's West Glacier entrance
+            </div>
+          </div>
+
+          <!-- Glacier -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]"
+              >
+                ★★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/glac/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Glacier_National_Park,_Going-to-the-Sun_Road.JPG/1920px-Glacier_National_Park,_Going-to-the-Sun_Road.JPG"
+                alt="Going-to-the-Sun Road, Glacier National Park, Montana"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 7–8 · 2 nights
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Glacier National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  2 days — Going-to-the-Sun Road (50-mile alpine drive, vehicle
+                  permit required — book February 2027, sells out in hours),
+                  Grinnell Glacier hike, Hidden Lake Overlook. Raw, wild, and
+                  utterly spectacular.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]"
+                    >Days 7–8 · 2 nights</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.8</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 5 hrs · 272 mi — I-90 W to Spokane
+            </div>
+          </div>
+
+          <!-- Spokane (NW) -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]"
+              >
+                ⛽
+              </div>
+              <div
+                class="w-px flex-1 min-h-3.5 mt-[5px] [background:repeating-linear-gradient(to_bottom,#E4E4E4_0,#E4E4E4_5px,transparent_5px,transparent_11px)]"
+              ></div>
+            </div>
+            <div
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+            >
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Day 12 · Overnight
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Spokane, Washington
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Big drive day to Spokane before going to Mount Rainier the next day.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]"
+                    >Transit night</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 5 hrs · 300 mi — I-90 E to Rainier's entrance
+            </div>
+          </div>
+
+          <!-- Rainier (NW) -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]"
+              >
+                ★
+              </div>
+              <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/mora/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Mount_Rainier_8164s.JPG/1920px-Mount_Rainier_8164s.JPG"
+                alt="Mount Rainier, Washington"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Day 11 · Half Day
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Mount Rainier National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Half to full day — Paradise Visitor Center, Skyline Trail
+                  loop, Myrtle Falls. Peak wildflowers bloom July–August. Then 2
+                  hrs into Seattle for the night before heading to Olympic.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]"
+                    >Day 11 · half day</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.9</span
+                  >
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 2 hrs · 85 mi — WA-7 N + I-5 N to Seattle
+            </div>
+          </div>
+
+          <!-- Seattle (NW) - transit -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]"
+              >
+                ⛽
+              </div>
+              <div
+                class="w-px flex-1 min-h-3.5 mt-[5px] [background:repeating-linear-gradient(to_bottom,#E4E4E4_0,#E4E4E4_5px,transparent_5px,transparent_11px)]"
+              ></div>
+            </div>
+            <div
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]"
+            >
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Day 12 · Overnight
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Seattle, Washington
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  Overnight in the city before the Olympic Peninsula finale.
+                  Pike Place Market, fresh Dungeness crab, and a well-earned
+                  rest before the final leg.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]"
+                    >Transit night</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-[7px] pl-[52px]">
+            <div
+              class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]"
+            >
+              🚗 3 hrs · 105 mi — US-101 W to Olympic's Hoh entrance
+            </div>
+          </div>
+
+          <!-- Olympic (NW) - Final -->
+          <div class="flex items-start">
+            <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
+              <div
+                class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]"
+              >
+                ■
+              </div>
+            </div>
+            <a
+              class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]"
+              href="https://www.nps.gov/olym/"
+              target="_blank"
+            >
+              <img
+                class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Hoh_Rainforest_-_Olympic_National_Park_-_Washington_State_%289779944142%29.jpg/1920px-Hoh_Rainforest_-_Olympic_National_Park_-_Washington_State_%289779944142%29.jpg"
+                alt="Hoh Rain Forest, Olympic National Park, Washington"
+              />
+              <div class="px-5 pt-[18px] pb-5">
+                <div
+                  class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5"
+                >
+                  Days 13–14 · Finish
+                </div>
+                <div
+                  class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2"
+                >
+                  Olympic National Park
+                </div>
+                <div class="text-[13px] text-[#666] leading-[1.7]">
+                  1.5 days — Hoh Rain Forest Hall of Mosses, Rialto Beach sea
+                  stacks and tide pools, Hurricane Ridge for mountain views.
+                  Three completely different ecosystems in one park —
+                  rainforest, alpine, and rugged Pacific coastline. The perfect
+                  wild ending.
+                </div>
+                <div
+                  class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]"
+                >
+                  <span
+                    class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]"
+                    >Days 13–14 · Final destination</span
+                  >
+                  <span class="text-xs text-[#E8A020] font-semibold"
+                    >⭐ 4.8</span
+                  >
+                </div>
+              </div>
+            </a>
           </div>
         </div>
-      </div>
-    </div>
 
-  </div>
-
-  <div class="mt-11 px-[26px] py-[22px] bg-white rounded-2xl border border-black/[0.08] [border-left:4px_solid_#E8A040]">
-    <h3 class="font-playfair text-[17px] mb-3">⚠️ Book these early for Summer 2027</h3>
-    <ul class="list-disc pl-[18px] flex flex-col gap-1.5">
-      <li class="text-[13px] text-[#666] leading-[1.65]"><strong class="text-[#1A1A1A] font-medium">Arches NP</strong> — Timed entry reservations open months in advance and sell out fast (recreation.gov).</li>
-      <li class="text-[13px] text-[#666] leading-[1.65]"><strong class="text-[#1A1A1A] font-medium">Zion — Angels Landing</strong> — Permit lottery required. Apply early at recreation.gov.</li>
-      <li class="text-[13px] text-[#666] leading-[1.65]"><strong class="text-[#1A1A1A] font-medium">Zion lodging</strong> — Book 6+ months out. Fills completely in summer.</li>
-      <li class="text-[13px] text-[#666] leading-[1.65]"><strong class="text-[#1A1A1A] font-medium">Crater Lake lodging</strong> — Limited options, books quickly for July–August.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ══════════ NORTHWEST ══════════ -->
-<div id="nw" class="route-panel hidden">
-
-  <div class="grid grid-cols-[1fr_1px_1fr_1px_1fr] bg-white border border-black/[0.08] rounded-2xl mb-10 overflow-hidden max-sm:grid-cols-1">
-    <div class="py-[22px] px-5 text-center">
-      <div class="font-playfair text-[30px] font-bold leading-none">~2,000</div>
-      <div class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]">Total miles</div>
-    </div>
-    <div class="bg-black/[0.08] max-sm:hidden"></div>
-    <div class="py-[22px] px-5 text-center">
-      <div class="font-playfair text-[30px] font-bold leading-none">11–14</div>
-      <div class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]">Days</div>
-    </div>
-    <div class="bg-black/[0.08] max-sm:hidden"></div>
-    <div class="py-[22px] px-5 text-center">
-      <div class="font-playfair text-[30px] font-bold leading-none">5</div>
-      <div class="text-[11px] uppercase tracking-[0.09em] text-[#aaa] mt-[5px]">National Parks</div>
-    </div>
-  </div>
-
-  <div class="flex flex-col">
-
-    <!-- Denver Start (NW) -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]">▶</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <div class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Start · Day 1</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Denver, Colorado</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Early departure recommended — it's a full 7-hour drive to Jackson Hole. Grab coffee and get moving. The Tetons will make it worth it.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]">Departure</span>
-          </div>
+        <div
+          class="mt-11 px-[26px] py-[22px] bg-white rounded-2xl border border-black/[0.08] [border-left:4px_solid_#E8A040]"
+        >
+          <h3 class="font-playfair text-[17px] mb-3">
+            ⚠️ Book these early for Summer 2027
+          </h3>
+          <ul class="list-disc pl-[18px] flex flex-col gap-1.5">
+            <li class="text-[13px] text-[#666] leading-[1.65]">
+              <strong class="text-[#1A1A1A] font-medium"
+                >Glacier — Going-to-the-Sun Road</strong
+              >
+              vehicle reservations open February 2027. Sell out within hours —
+              set a calendar reminder now.
+            </li>
+            <li class="text-[13px] text-[#666] leading-[1.65]">
+              <strong class="text-[#1A1A1A] font-medium"
+                >Yellowstone lodging</strong
+              >
+              — Opens 13 months in advance. Book as early as possible; in-park
+              lodges fill completely for summer.
+            </li>
+            <li class="text-[13px] text-[#666] leading-[1.65]">
+              <strong class="text-[#1A1A1A] font-medium"
+                >Grand Teton lodging</strong
+              >
+              — Book 6+ months out. Jackson Hole fills fast with summer
+              visitors.
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </main>
 
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 7 hrs · 440 mi — I-25 N + US-287 N to Jackson, WY</div>
-    </div>
+    <footer
+      class="text-center px-5 py-[30px] text-xs text-[#CCC] border-t border-black/[0.08] mt-[60px] tracking-[0.03em]"
+    >
+      Denver → Seattle · Summer 2027 National Park Road Trip
+    </footer>
 
-    <!-- Grand Teton -->
-    <div class="flex items-start mt-[5px]">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]">★★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/grte/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Oxbow_Bend_-_Grand_Teton_National_Park_-_Wyoming.jpg/1920px-Oxbow_Bend_-_Grand_Teton_National_Park_-_Wyoming.jpg"
-          alt="Oxbow Bend, Grand Teton National Park, Wyoming">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 2–3 · 2 nights in Jackson</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Grand Teton National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">1.5–2 days — Jenny Lake loop, Oxbow Bend for moose and elk at dawn, Snake River Overlook. Arguably the most dramatic mountain skyline in the continental US. Jackson Hole is an excellent base for food and lodging.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]">Days 2–3 · 2 nights</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.9</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 1 hr · 60 mi — US-89/191 N straight into Yellowstone's south entrance</div>
-    </div>
-
-    <!-- Yellowstone -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]">★★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/yell/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Grand_Prismatic_Spring_2013.jpg/1920px-Grand_Prismatic_Spring_2013.jpg"
-          alt="Grand Prismatic Spring, Yellowstone National Park">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 4–5 · 2 nights inside the park</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Yellowstone National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">2 full days — Old Faithful and the Upper Geyser Basin, Grand Prismatic Spring (hike the Fairy Falls trail for the aerial view), Grand Canyon of the Yellowstone, Lamar Valley wildlife drive at dawn and dusk for bison, wolves, and bears. Book lodging 13 months in advance.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]">Days 4–5 · 2 nights</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.8</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 4 hrs · 245 mi — US-89 N + US-93 N to Kalispell, MT</div>
-    </div>
-
-    <!-- Kalispell transit -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]">⛽</div>
-        <div class="w-px flex-1 min-h-3.5 mt-[5px] [background:repeating-linear-gradient(to_bottom,#E4E4E4_0,#E4E4E4_5px,transparent_5px,transparent_11px)]"></div>
-      </div>
-      <div class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Day 6 · Transit</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Kalispell, Montana</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Gateway town to Glacier. Good restaurants, easy overnight. Stock up on snacks and bear spray before hitting the park tomorrow.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]">Transit night</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 35 min · 30 mi — US-2 E to Glacier's West Glacier entrance</div>
-    </div>
-
-    <!-- Glacier -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]">★★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/glac/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Glacier_National_Park,_Going-to-the-Sun_Road.JPG/1920px-Glacier_National_Park,_Going-to-the-Sun_Road.JPG"
-          alt="Going-to-the-Sun Road, Glacier National Park, Montana">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 7–8 · 2 nights</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Glacier National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">2 days — Going-to-the-Sun Road (50-mile alpine drive, vehicle permit required — book February 2027, sells out in hours), Grinnell Glacier hike, Hidden Lake Overlook. Raw, wild, and utterly spectacular.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]">Days 7–8 · 2 nights</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.8</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 9 hrs · 570 mi — US-2 W + I-90 W + US-97 S + OR-138 E to Crater Lake</div>
-    </div>
-
-    <!-- Crater Lake (NW) -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]">★★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/crla/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Crater_lake_oregon.jpg/1920px-Crater_lake_oregon.jpg"
-          alt="Crater Lake, Oregon">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 9–10 · 1 night</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Crater Lake National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Full Rim Drive (33 miles), Watchman Peak hike, Cleetwood Cove trail to the water's edge. The deepest lake in the US, filled entirely by rain and snow — the electric blue is surreal in person and worth every mile of the Oregon detour.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]">Days 9–10 · 1 night</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.9</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 5 hrs · 310 mi — OR-138 W + I-5 N + US-12 E to Rainier's Nisqually entrance</div>
-    </div>
-
-    <!-- Rainier (NW) -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EAF5FF] border-[#60B0E0] text-[#1A4A7A]">★</div>
-        <div class="w-px bg-[#E4E4E4] flex-1 min-h-3.5 mt-[5px]"></div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/mora/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Mount_Rainier_8164s.JPG/1920px-Mount_Rainier_8164s.JPG"
-          alt="Mount Rainier, Washington">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Day 11 · Half Day</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Mount Rainier National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Half to full day — Paradise Visitor Center, Skyline Trail loop, Myrtle Falls. Peak wildflowers bloom July–August. Then 2 hrs into Seattle for the night before heading to Olympic.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]">Day 11 · half day</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.9</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 2 hrs · 85 mi — WA-7 N + I-5 N to Seattle</div>
-    </div>
-
-    <!-- Seattle (NW) - transit -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]">⛽</div>
-        <div class="w-px flex-1 min-h-3.5 mt-[5px] [background:repeating-linear-gradient(to_bottom,#E4E4E4_0,#E4E4E4_5px,transparent_5px,transparent_11px)]"></div>
-      </div>
-      <div class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)]">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Day 12 · Overnight</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Seattle, Washington</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">Overnight in the city before the Olympic Peninsula finale. Pike Place Market, fresh Dungeness crab, and a well-earned rest before the final leg.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#F5F5F5] text-[#777]">Transit night</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="py-[7px] pl-[52px]">
-      <div class="inline-flex items-center gap-[7px] text-[11.5px] text-[#999] bg-white border border-[#EBEBEB] rounded-full px-3.5 py-[5px]">🚗 3 hrs · 105 mi — US-101 W to Olympic's Hoh entrance</div>
-    </div>
-
-    <!-- Olympic (NW) - Final -->
-    <div class="flex items-start">
-      <div class="flex flex-col items-center w-[38px] shrink-0 pt-5">
-        <div class="w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold border-2 shrink-0 bg-[#EEF3FF] border-[#93B0FF] text-[#3050BB]">■</div>
-      </div>
-      <a class="flex-1 ml-3.5 mb-1 rounded-2xl overflow-hidden bg-white border border-black/[0.08] transition-[box-shadow,border-color] duration-[180ms] block no-underline text-inherit cursor-pointer hover:shadow-[0_6px_28px_rgba(0,0,0,0.07)] hover:border-black/[0.18]" href="https://www.nps.gov/olym/" target="_blank">
-        <img class="w-full h-[210px] object-cover block bg-[#EDE8DF] max-sm:h-[170px]"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Hoh_Rainforest_-_Olympic_National_Park_-_Washington_State_%289779944142%29.jpg/1920px-Hoh_Rainforest_-_Olympic_National_Park_-_Washington_State_%289779944142%29.jpg"
-          alt="Hoh Rain Forest, Olympic National Park, Washington">
-        <div class="px-5 pt-[18px] pb-5">
-          <div class="text-[10px] font-semibold tracking-[0.13em] uppercase text-[#BBB] mb-1.5">Days 13–14 · Finish</div>
-          <div class="font-playfair text-[19px] font-semibold leading-[1.2] mb-2">Olympic National Park</div>
-          <div class="text-[13px] text-[#666] leading-[1.7]">1.5 days — Hoh Rain Forest Hall of Mosses, Rialto Beach sea stacks and tide pools, Hurricane Ridge for mountain views. Three completely different ecosystems in one park — rainforest, alpine, and rugged Pacific coastline. The perfect wild ending.</div>
-          <div class="flex items-center justify-between mt-3.5 pt-3.5 border-t border-black/[0.08]">
-            <span class="text-[11px] font-medium px-3 py-1 rounded-full bg-[#EAF5FF] text-[#1A4A7A]">Days 13–14 · Final destination</span>
-            <span class="text-xs text-[#E8A020] font-semibold">⭐ 4.8</span>
-          </div>
-        </div>
-      </a>
-    </div>
-
-  </div>
-
-  <div class="mt-11 px-[26px] py-[22px] bg-white rounded-2xl border border-black/[0.08] [border-left:4px_solid_#E8A040]">
-    <h3 class="font-playfair text-[17px] mb-3">⚠️ Book these early for Summer 2027</h3>
-    <ul class="list-disc pl-[18px] flex flex-col gap-1.5">
-      <li class="text-[13px] text-[#666] leading-[1.65]"><strong class="text-[#1A1A1A] font-medium">Glacier — Going-to-the-Sun Road</strong> vehicle reservations open February 2027. Sell out within hours — set a calendar reminder now.</li>
-      <li class="text-[13px] text-[#666] leading-[1.65]"><strong class="text-[#1A1A1A] font-medium">Yellowstone lodging</strong> — Opens 13 months in advance. Book as early as possible; in-park lodges fill completely for summer.</li>
-      <li class="text-[13px] text-[#666] leading-[1.65]"><strong class="text-[#1A1A1A] font-medium">Grand Teton lodging</strong> — Book 6+ months out. Jackson Hole fills fast with summer visitors.</li>
-    </ul>
-  </div>
-</div>
-
-</main>
-
-<footer class="text-center px-5 py-[30px] text-xs text-[#CCC] border-t border-black/[0.08] mt-[60px] tracking-[0.03em]">
-  Denver → Seattle · Summer 2027 National Park Road Trip
-</footer>
-
-<script>
-function showRoute(id, btn) {
-  document.querySelectorAll('.route-panel').forEach(p => p.classList.add('hidden'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.remove('hidden');
-  btn.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-</script>
-</body>
+    <script>
+      function showRoute(id, btn) {
+        document
+          .querySelectorAll(".route-panel")
+          .forEach((p) => p.classList.add("hidden"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById(id).classList.remove("hidden");
+        btn.classList.add("active");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    </script>
+  </body>
 </html>
